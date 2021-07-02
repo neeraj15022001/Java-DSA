@@ -1,8 +1,25 @@
 import java.util.Scanner;
 
 public class takeInputAndCreateLinkedList {
-//    Time Complexity of this method is O(n)
+    public static LinkedListNode<Integer> insert(LinkedListNode<Integer> head, int data, int position) {
+        LinkedListNode<Integer> newNode = new LinkedListNode<>(data);
+        if (position == 0) {
+            newNode.next = head;
+            head = newNode;
+            return head;
+        }
+        int i = 0;
+        LinkedListNode<Integer> temp = head;
+        while (i < position - 1) {
+            temp = temp.next;
+        }
+        newNode.next = temp.next;
+        temp.next = newNode;
+        return head;
+    }
+
     public static LinkedListNode<Integer> takeInput2() {
+        //    Time Complexity of this method is O(n)
         LinkedListNode<Integer> head = null;
         LinkedListNode<Integer> tail = null;
         Scanner sc = new Scanner(System.in);
@@ -20,6 +37,7 @@ public class takeInputAndCreateLinkedList {
         }
         return head;
     }
+
     public static LinkedListNode<Integer> takeInput() {
 //        Time Complexity for this method is O(n^2)
         LinkedListNode<Integer> head = null;
@@ -29,7 +47,7 @@ public class takeInputAndCreateLinkedList {
             LinkedListNode<Integer> newNode = new LinkedListNode<>(data);
             if (head == null) {
                 head = newNode;
-            } else  {
+            } else {
                 LinkedListNode<Integer> temp = head;
                 while (temp.next != null) {
                     temp = temp.next;
@@ -40,6 +58,7 @@ public class takeInputAndCreateLinkedList {
         }
         return head;
     }
+
     public static void printLinkedList(LinkedListNode<Integer> head) {
         while (head != null) {
             System.out.print(head.data + " ");
@@ -47,8 +66,10 @@ public class takeInputAndCreateLinkedList {
         }
         System.out.println();
     }
+
     public static void main(String[] args) {
         LinkedListNode<Integer> head = takeInput2();
+        head = insert(head, 80, 2);
         printLinkedList(head);
     }
 }
