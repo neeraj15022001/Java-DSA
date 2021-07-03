@@ -1,8 +1,0 @@
-ArrayListDemo.java
- ArrayListDemo
-LinkedListNode.java
- LinkedListNode
-LinkedList.java
- LinkedList
-takeInputAndCreateLinkedList.java
- takeInputAndCreateLinkedList
