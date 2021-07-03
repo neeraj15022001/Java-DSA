@@ -12,6 +12,31 @@ public class LinkedListPractice {
         return count;
     }
 
+    public Node<Integer> deleteNode(Node<Integer> head, int position) throws IOException {
+        Node<Integer> temp = null;
+        Node<Integer> temp2 = null;
+        int i = 0;
+        if (position <= 0)
+            throw new IOException("Enter value of position greater than 0");
+        if (position == 1) {
+            head = head.nextNode;
+            return head;
+        }
+        while (i < position) {
+            if (temp == null) {
+                temp = head;
+                temp2 = head;
+            } else {
+                temp = temp.nextNode;
+                if (i < position - 1)
+                    temp2 = temp2.nextNode;
+            }
+            i++;
+        }
+        temp2.nextNode = temp.nextNode;
+        return head;
+    }
+
     public Node<Integer> insert(Node<Integer> head, int data, int position) throws IOException {
         Node<Integer> newNode = new Node<>(data);
         int i = 0;
@@ -74,7 +99,9 @@ public class LinkedListPractice {
         node2.nextNode = node3;
         LinkedListPractice lp = new LinkedListPractice();
         Node<Integer> head = lp.takeInput();
-        head = lp.insert(head, 80, 4);
+//        head = lp.insert(head, 80, 4);
+//        lp.printLinkedList(head);
+        head = lp.deleteNode(head,3);
         lp.printLinkedList(head);
     }
 }
