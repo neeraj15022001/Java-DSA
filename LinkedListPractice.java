@@ -12,6 +12,19 @@ public class LinkedListPractice {
         return count;
     }
 
+    public int midpointOfLinkedList(Node<Integer> head) {
+        int length = getLinkedListLength(head);
+        if (length%2 == 0)
+            throw new ArithmeticException("Enter odd LinkedList");
+        Node<Integer> slow = head;
+        Node<Integer> fast = head;
+        while (fast.nextNode != null) {
+            slow = slow.nextNode;
+            fast = fast.nextNode.nextNode;
+        }
+        return slow.data;
+    }
+
     public Node<Integer> deleteNode(Node<Integer> head, int position) throws IOException {
         Node<Integer> temp = null;
         Node<Integer> temp2 = null;
@@ -101,7 +114,9 @@ public class LinkedListPractice {
         Node<Integer> head = lp.takeInput();
 //        head = lp.insert(head, 80, 4);
 //        lp.printLinkedList(head);
-        head = lp.deleteNode(head,3);
-        lp.printLinkedList(head);
+//        head = lp.deleteNode(head,3);
+        int mid = lp.midpointOfLinkedList(head);
+        System.out.println(mid);
+//        lp.printLinkedList(head);
     }
 }
