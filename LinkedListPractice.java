@@ -2,6 +2,14 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class LinkedListPractice {
+    public Node<Integer> getTail(Node<Integer> head) {
+        Node<Integer> tail = head;
+        while (tail.nextNode != null) {
+            tail = tail.nextNode;
+        }
+        return tail;
+    }
+
     public int getLinkedListLength(Node<Integer> head) {
         int count = 0;
         Node<Integer> temp = head;
