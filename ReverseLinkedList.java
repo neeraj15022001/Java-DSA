@@ -2,6 +2,16 @@ import java.util.Scanner;
 
 public class ReverseLinkedList {
 
+    public static Node<Integer> reverseLL(Node<Integer> head) {
+        if (head == null || head.nextNode == null)
+            return head;
+        Node<Integer> reversedTail = head.nextNode;
+        Node<Integer> ans = reverseLL(head.nextNode);
+        reversedTail.nextNode = head;
+        head.nextNode = null;
+        return ans;
+    }
+
     public static DoubleNode reverseLLBetter(Node<Integer> head) {
         if (head == null || head.nextNode == null) {
             DoubleNode result = new DoubleNode();
@@ -64,7 +74,8 @@ public class ReverseLinkedList {
         Node<Integer> head = takeInput();
         printLinkedList(head);
 //        Node<Integer> newHead = reverseL(head);
-        DoubleNode ans = reverseLLBetter(head);
-        printLinkedList(ans.head);
+//        DoubleNode ans = reverseLLBetter(head);
+        Node<Integer> newHead = reverseLL(head);
+        printLinkedList(newHead);
     }
 }
