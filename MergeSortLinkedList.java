@@ -29,27 +29,26 @@ class MergeSortLinkedList {
     public static Node<Integer> mergeSort(Node<Integer> head) {
         if (head == null || head.nextNode == null)
             return head;
-        Node<Integer> mid = findMid(head, tail);
-        System.out.println(mid.data);
-        Node<Integer> list1 = mergeSort(head, mid);
-        Node<Integer> list2 = mergeSort(mid.nextNode, tail);
+        Node<Integer> mid = findMid(head);
+        Node<Integer> nextMid = mid.nextNode;
+        mid.nextNode = null;
+        Node<Integer> list1 = mergeSort(head);
+        Node<Integer> list2 = mergeSort(nextMid);
         Node<Integer> sortedList = merge(list1, list2);
         return sortedList;
     }
 
-    public static Node<Integer> findMid(Node<Integer> head, Node<Integer> tail) {
-        int count = 0;
-        Node<Integer> mid = head;
-        while (head != tail) {
-            if ((count % 2) == 1)
-                mid = mid.nextNode;
-            ++count;
-            head = head.nextNode;
+    public static Node<Integer> findMid(Node<Integer> head) {
+        if (head == null)
+            return head;
+
+        Node<Integer> slow = head, fast = head;
+
+        while (fast.nextNode != null && fast.nextNode.nextNode != null) {
+            slow = slow.nextNode;
+            fast = fast.nextNode.nextNode;
         }
-        if (mid != null)
-            return mid;
-        else
-            throw new ArithmeticException("List size is less");
+        return slow;
     }
 
     public static Node<Integer> takeInput() {
@@ -81,9 +80,9 @@ class MergeSortLinkedList {
 
     public static void main(String[] args) {
         Node<Integer> head = takeInput();
-        printLinkedList(head);
         Node<Integer> tail = getTail(head);
-        Node<Integer> mid = findMid(head, tail);
-        mergeSort(head, tail);
+        Node<Integer> mid = findMid(head);
+        Node<Integer> newHead = mergeSort(head);
+        printLinkedList(newHead);
     }
 }
