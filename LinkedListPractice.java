@@ -2,6 +2,14 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class LinkedListPractice {
+    public Node<Integer> getTail(Node<Integer> head) {
+        Node<Integer> tail = head;
+        while (tail.nextNode != null) {
+            tail = tail.nextNode;
+        }
+        return tail;
+    }
+
     public int getLinkedListLength(Node<Integer> head) {
         int count = 0;
         Node<Integer> temp = head;
@@ -10,6 +18,19 @@ public class LinkedListPractice {
             count++;
         }
         return count;
+    }
+
+    public int midpointOfLinkedList(Node<Integer> head) {
+        int length = getLinkedListLength(head);
+        if (length%2 == 0)
+            throw new ArithmeticException("Enter odd LinkedList");
+        Node<Integer> slow = head;
+        Node<Integer> fast = head;
+        while (fast.nextNode != null) {
+            slow = slow.nextNode;
+            fast = fast.nextNode.nextNode;
+        }
+        return slow.data;
     }
 
     public Node<Integer> deleteNode(Node<Integer> head, int position) throws IOException {
@@ -101,7 +122,9 @@ public class LinkedListPractice {
         Node<Integer> head = lp.takeInput();
 //        head = lp.insert(head, 80, 4);
 //        lp.printLinkedList(head);
-        head = lp.deleteNode(head,3);
-        lp.printLinkedList(head);
+//        head = lp.deleteNode(head,3);
+        int mid = lp.midpointOfLinkedList(head);
+        System.out.println(mid);
+//        lp.printLinkedList(head);
     }
 }
