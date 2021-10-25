@@ -4,7 +4,32 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+class Pair<T, V> {
+    public T height;
+    public V diameter;
+}
+
 public class BinaryTreeUse {
+    public static Pair<Integer, Integer> diameterBetter(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            Pair<Integer, Integer> output = new Pair<>();
+            output.height = 0;
+            output.diameter = 0;
+            return output;
+        }
+        Pair<Integer, Integer> leftOutput = diameterBetter(root.left);
+        Pair<Integer, Integer> rightOutput = diameterBetter(root.right);
+        int height = 1 + Math.max(leftOutput.height, rightOutput.height);
+        int option1 = leftOutput.height + rightOutput.height;
+        int option2 = leftOutput.height;
+        int option3 = rightOutput.height;
+        int diameter = Math.max(option1, Math.max(option2, option3));
+        Pair<Integer, Integer> ans = new Pair<>();
+        ans.height = height;
+        ans.diameter = diameter;
+        return ans;
+    }
+
     public static int height(BinaryTreeNode<Integer> root) {
         if (root == null) {
             return 0;
@@ -128,6 +153,8 @@ public class BinaryTreeUse {
         BinaryTreeNode<Integer> root = takeInputLevelWise();
         printLevelWise(root);
         sc.close();
-        System.out.println(countNodes(root));
+//        System.out.println(countNodes(root));
+        Pair<Integer, Integer> ans = diameterBetter(root);
+        System.out.println("Height: " + ans.height + " Diameter: " + ans.diameter);
     }
 }
